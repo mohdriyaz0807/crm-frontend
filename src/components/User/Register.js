@@ -17,7 +17,8 @@ const useStyles = makeStyles((theme) => ({
     title:{
         fontSize:'150%',
         fontFamily:'serif',
-        fontStyle:'bold'
+        fontStyle:'bold',
+        textAlign:'center'
     }
   }));
 
@@ -63,7 +64,7 @@ const Register = () =>{
         <div className={classes.root}>
         <Grid container spacing={2}>
           <Grid item sm={3} xs={12} md={4}>
-          <h1>Easy CRM</h1><br/><h2>Register Today to get the First Class Experience</h2>
+          <h1>Easy CRM</h1><h2>Register now to get the Exclusive Benefits</h2>
           </Grid>
         <Grid item sm={6} xs={12} md={4}>
         <Paper className={classes.paper}>

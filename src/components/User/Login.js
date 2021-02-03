@@ -23,7 +23,11 @@ const useStyles = makeStyles((theme) => ({
 title:{
     fontSize:'150%',
     fontFamily:'serif',
-    fontStyle:'bold'
+    fontStyle:'bold',
+    textAlign:'center'
+},
+note:{
+  textAlign:'center',
 }
 }));
 
@@ -71,7 +75,7 @@ const Login =() =>{
         <div className={classes.root}>
             <Grid container spacing={2}>
             <Grid item sm={4} xs={12} md={6} className={classes.title}>
-            <h1>Easy CRM</h1><br/><h2>Business Made Easy</h2>
+            <h1>Easy CRM</h1><h2>Business Made Easy</h2>
             </Grid>
             <Grid item sm={8} xs={12} md={6}>
             <Paper className={classes.paper}>
@@ -88,7 +92,7 @@ const Login =() =>{
             </FormControl><br/><br/>
             <FormControl>
             <Button variant="contained" color="primary" disabled={loading} onClick={submit}>
-            {loading ? "Please Wait.." : "Login" }
+            {loading ? "Logging in.." : "Login" }
             </Button>
             </FormControl><br/><br/>
             <FormControl>
@@ -98,6 +102,13 @@ const Login =() =>{
             <Link to='./Forgot'>Forgot Password?</Link>
             </FormControl>
             </Paper>
+            </Grid>
+            </Grid><hr/>
+            <Grid container spacing={2}>
+            <Grid item sm={12} xs={12} md={12} className={classes.note}>
+            <p>For Login purpose, use below credentials</p>
+            <p>Email : admin@crm.com</p>
+            <p>Password : 12451245</p>
             </Grid>
             </Grid>
             </div>

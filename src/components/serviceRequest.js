@@ -1,6 +1,6 @@
 import React from 'react'
 
-const serviceRequest = () => {
+const ServiceRequest = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const serviceRequest = () => {
     )
 }
 
-export default serviceRequest
+export default ServiceRequest

@@ -1,35 +1,46 @@
 import React ,{useEffect, useState} from "react";
-import { connect } from "react-redux";
-import {useHistory} from 'react-router-dom'
-import { setusertype } from "./components/Redux/User/user-actions";
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import {Paper,makeStyles,Grid,Typography,Button} from '@material-ui/core';
+import { Link } from "react-router-dom";
+import Swal from 'sweetalert2';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  firstline:{
+    textAlign:'center',
+    fontSize:'200%',
+    fontFamily:'serif',
+    padding:theme.spacing(2),
+    },
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
+    textDecorationLine:'none'
   },
 }));
 
 
-const Dashboard = ({ usertype ,setusertype }) => {
-    let history = useHistory()
-
+const Dashboard = () => {
+  let url='https://crm-easy.herokuapp.com'
+  const SweetAlert =(status,data)=>{
+    Swal.fire({
+      icon: status,
+      title: 'Alert',
+      text: data,
+  })
+  }
     useEffect(()=>{
-        
-        fetch("", {
+        fetch(`${url}/dashboard`, {
             method : "GET",
             headers : {
-              "auth" : localStorage.getItem('crmApplication')
+              "auth" : localStorage.getItem('token')
             }
         }).then(res => res.json()).then((data) =>{ 
-            if(data.message === "authorization failed"){
-              setusertype(null);
+            if(data.message === "session ended"){
+              SweetAlert(data.icon,data.message)
             } else{
             console.log(data)
             setstate(data) 
@@ -37,20 +48,22 @@ const Dashboard = ({ usertype ,setusertype }) => {
     })} , [] )
 
     const [state, setstate] = useState({service : "" , leads : "" , contacts : "" })
+    
 
     const classes = useStyles();
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={12}>
-          <Paper className={classes.paper}>
-          
+          <Paper className={classes.firstline}>
+          <h6>Hello {localStorage.getItem('userdata').name}, Here we are Happy to help with your buisness.</h6>
           </Paper>
         </Grid>
         </Grid>
 
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={12} md={4} onClick={}>
+        <Grid item xs={12} sm={4} md={4} >
+      <Link to='./ServiceRequest'>
           <Paper className={classes.paper}>
             <Typography>
             Service Request
@@ -58,9 +71,10 @@ const Dashboard = ({ usertype ,setusertype }) => {
             <Typography>
             {state.service.length}
             </Typography>
-          </Paper>
+          </Paper></Link>
         </Grid>
-        <Grid item xs={12} sm={12} md={4} onClick={}>
+        <Grid item xs={12} sm={4} md={4} >
+        <Link to='./Leads'>
           <Paper className={classes.paper}>
             <Typography>
             Leads
@@ -68,9 +82,10 @@ const Dashboard = ({ usertype ,setusertype }) => {
             <Typography>
             {state.leads.length}
             </Typography>
-          </Paper>
+          </Paper></Link>
           </Grid>
-        <Grid item xs={12} sm={12} md={4} onClick={}>
+        <Grid item xs={12} sm={4} md={4} >
+        <Link to='./Contacts'>
           <Paper className={classes.paper}>
             <Typography>
             Contacts
@@ -78,20 +93,22 @@ const Dashboard = ({ usertype ,setusertype }) => {
             <Typography>
             {state.contacts.length}
             </Typography>
-          </Paper>
+          </Paper></Link>
           </Grid>
       </Grid>
+      {(localStorage.getItem('userdata').access!=="Employee")?
+      <Grid container spacing={10}>
+        <Grid item xs={4} sm={4}md={4}></Grid>
+        <Grid item xs={4} sm={4} md={4}>
+          <Paper className={classes.paper}>
+          <Link to='./AllowAccess'><Button>Allow Access</Button></Link>
+          </Paper>
+        </Grid>
+        </Grid>:""}
     </div>
   )
     }
 
 
-const mapStateToProps = (state) => ({
-  usertype : state.user.usertype
-});
 
-const mapDispatchToProps = (dispatch) => ({
-  setusertype : (user) => dispatch(setusertype(user))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps )(Dashboard);
+export default Dashboard;

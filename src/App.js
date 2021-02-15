@@ -5,18 +5,20 @@ import {Login ,String} from "./components/User/Login";
 import Register from "./components/User/Register";
 import Forgot from "./components/User/Forgot";
 import Reset from "./components/User/Reset";
-import ContactsList from "./components/Contacts/ContactsList"
-import LeadList from "./components/Lead/LeadList";
-import ServiceList from "./components/ServiceRequest/ServiceList";
+import Contacts from "./components/Contacts/Contacts"
+import Leads from "./components/Lead/Leads";
+import Service from "./components/ServiceRequest/Service";
 import Dashboard from "./components/Dashboard";
 import AllowAccess from './components/AllowAccess'
 import Error from './components/Error'
+import Header from './components/Header'
 
 
 
 function App() {
   return (
     <>
+    <Header/>
     <Router>
       <Switch>
         <Route exact path="/">
@@ -41,13 +43,13 @@ function App() {
          <Reset/>
         </Route>
         <Route path="/Contacts">
-            <ContactsList/>
+            <Contacts/>
         </Route>
         <Route path="/ServiceRequest">
-            <ServiceList/>
+            <Service/>
         </Route>
         <Route path="/Leads">
-            <LeadList/>
+            <Leads/>
         </Route>
         <Route path="/AllowAccess">
             <AllowAccess/>

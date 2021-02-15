@@ -22,11 +22,11 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(4),
     boxShadow:'3px 5px gray',
-    backgroundColor:"#ff9980" ,
+    backgroundColor:"lightslategray",
     textAlign: 'center',
     color: theme.palette.text.secondary,
     textDecorationLine:'none',
-    color:'black',
+    color:'white',
   },
 }));
 

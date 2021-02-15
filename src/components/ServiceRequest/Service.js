@@ -13,7 +13,7 @@ function Service() {
         <Row>
           <Col>
             <h2 className="float-left">Service</h2>
-            <Button className="float-right" onClick={() => {if(show === "none") setShow("flex"); else setShow("none"); setData({email : '' , description : "" , status : "created" }) }} >{show === "none" ? "New Service request" : "Close"  }</Button>
+            <Button variant="success" className="float-right" onClick={() => {if(show === "none") setShow("flex"); else setShow("none"); setData({email : '' , description : "" , status : "created" }) }} >{show === "none" ? "New Service request" : "Close"  }</Button>
           </Col>
         </Row>
         <Row style={{display : show }}>

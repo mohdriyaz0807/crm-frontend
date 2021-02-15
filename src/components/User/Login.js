@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
     padding: theme.spacing(4),
     flexGrow: 1,
-    marginBottom:'15%',
+    backgroundImage:'url(https://i.pinimg.com/originals/e2/34/b5/e234b5999940f25089b7bfd89ab74651.jpg)'
     },
     firstline:{
     textAlign:'center',
@@ -21,13 +21,17 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
 },
 title:{
-    fontSize:'150%',
+    fontSize:'100%',
     fontFamily:'serif',
     fontStyle:'bold',
-    textAlign:'center'
+    textAlign:'center',
 },
 note:{
   textAlign:'center',
+  backgroundColor:'lightblue',
+  paddingBlock:'2%',
+  border:'4px solid white',
+  borderTopStyle:'curl'
 }
 }));
 
@@ -73,11 +77,12 @@ const Login =() =>{
     const classes = useStyles()
     return(
         <div className={classes.root}>
-            <Grid container spacing={2}>
-            <Grid item sm={4} xs={12} md={6} className={classes.title}>
-            <h1>Easy CRM</h1><h2>Business Made Easy</h2>
+            <Grid container spacing={2} alignItems='center'>
+            <Grid item sm={4} xs={12} md={7} className={classes.title}>
+            <h1>Easy CRM</h1><h2><i>Business Made Easy</i></h2>
+            <p>India's Best Customer Relationship Management Application</p>
             </Grid>
-            <Grid item sm={8} xs={12} md={6}>
+            <Grid item sm={8} xs={12} md={5}>
             <Paper className={classes.paper}>
             <h1 className={classes.firstline}>Login</h1>
             <FormControl >
@@ -102,13 +107,11 @@ const Login =() =>{
             <Link to='./Forgot'>Forgot Password?</Link>
             </FormControl>
             </Paper>
-            </Grid>
-            </Grid><hr/>
-            <Grid container spacing={2}>
-            <Grid item sm={12} xs={12} md={12} className={classes.note}>
-            <p>For Login purpose, use below credentials</p>
+            <div className={classes.note}>
+            <h4>For Login purpose, use below credentials</h4>
             <p>Email : admin@crm.com</p>
             <p>Password : 12451245</p>
+            </div>
             </Grid>
             </Grid>
             </div>

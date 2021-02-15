@@ -1,16 +1,17 @@
-import React from "react";
+import React,{useState} from "react";
 import "./App.css";
 import { Switch, Route, BrowserRouter as Router,Redirect } from "react-router-dom";
 import {Login ,String} from "./components/User/Login";
 import Register from "./components/User/Register";
 import Forgot from "./components/User/Forgot";
 import Reset from "./components/User/Reset";
-import Contacts from "./components/Contacts"
-import Leads from "./components/Leads";
-import ServiceRequest from "./components/ServiceRequest";
+import ContactsList from "./components/Contacts/ContactsList"
+import LeadList from "./components/Lead/LeadList";
+import ServiceList from "./components/ServiceRequest/ServiceList";
 import Dashboard from "./components/Dashboard";
 import AllowAccess from './components/AllowAccess'
 import Error from './components/Error'
+
 
 
 function App() {
@@ -19,8 +20,8 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/">
-          <Redirect to="/Login"> </Redirect>
-        </Route>
+        <Login/> 
+          </Route>
         <Route path="/Login">
         <Login/> 
         </Route>
@@ -40,13 +41,13 @@ function App() {
          <Reset/>
         </Route>
         <Route path="/Contacts">
-            <Contacts/>
+            <ContactsList/>
         </Route>
         <Route path="/ServiceRequest">
-            <ServiceRequest/>
+            <ServiceList/>
         </Route>
         <Route path="/Leads">
-            <Leads/>
+            <LeadList/>
         </Route>
         <Route path="/AllowAccess">
             <AllowAccess/>

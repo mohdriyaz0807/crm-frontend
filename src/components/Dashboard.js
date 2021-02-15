@@ -8,20 +8,27 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  btn:{
+    display: 'flex',
+    justifyContent:'center',
+    marginTop:'5%'
+  },
   firstline:{
-    textAlign:'center',
-    fontSize:'200%',
-    fontFamily:'serif',
     padding:theme.spacing(2),
+    backgroundImage: 'url(https://i.pinimg.com/originals/05/bb/0e/05bb0e21f08fe5753f8b88204f0a99db.jpg)',
+    backgroundSize: 'cover',
+    height:'40vh'
     },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(4),
+    boxShadow:'3px 5px gray',
+    backgroundColor:"#ff9980" ,
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    textDecorationLine:'none'
+    textDecorationLine:'none',
+    color:'black',
   },
 }));
-
 
 const Dashboard = () => {
   let url='https://crm-easy.herokuapp.com'
@@ -39,72 +46,63 @@ const Dashboard = () => {
               "auth" : localStorage.getItem('token')
             }
         }).then(res => res.json()).then((data) =>{ 
-            if(data.message === "session ended"){
+            if(data.icon == "warning"){
               SweetAlert(data.icon,data.message)
+              window.location.href='/Login'
             } else{
             console.log(data)
-            setstate(data) 
+            setstate(data)
           }
     })} , [] )
-
     const [state, setstate] = useState({service : "" , leads : "" , contacts : "" })
-    
 
     const classes = useStyles();
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={12}>
-          <Paper className={classes.firstline}>
-          <h6>Hello {localStorage.getItem('userdata').name}, Here we are Happy to help with your buisness.</h6>
+          <Paper className={classes.firstline} >
           </Paper>
         </Grid>
         </Grid>
 
       <Grid container spacing={3}>
         <Grid item xs={12} sm={4} md={4} >
-      <Link to='./ServiceRequest'>
           <Paper className={classes.paper}>
             <Typography>
-            Service Request
+            Service Request - {state.service.length}
             </Typography>
-            <Typography>
-            {state.service.length}
-            </Typography>
-          </Paper></Link>
+      <Link to='./ServiceRequest' style={{textDecoration :'none'}}><Button variant='contained' color="secondary">
+        View 
+      </Button>
+      </Link>
+          </Paper>
         </Grid>
         <Grid item xs={12} sm={4} md={4} >
-        <Link to='./Leads'>
           <Paper className={classes.paper}>
             <Typography>
-            Leads
+            Leads - {state.leads.length}
             </Typography>
-            <Typography>
-            {state.leads.length}
-            </Typography>
-          </Paper></Link>
+        <Link to='./Leads' style={{textDecoration :'none'}}><Button variant='contained' color="secondary">
+          View  </Button>
+        </Link>
+          </Paper>
           </Grid>
         <Grid item xs={12} sm={4} md={4} >
-        <Link to='./Contacts'>
           <Paper className={classes.paper}>
             <Typography>
-            Contacts
+            Contacts - {state.contacts.length}
             </Typography>
-            <Typography>
-            {state.contacts.length}
-            </Typography>
-          </Paper></Link>
+        <Link to='./Contacts' style={{textDecoration :'none'}}><Button variant='contained' color="secondary">
+          View 
+        </Button>
+        </Link>
+          </Paper>
           </Grid>
       </Grid>
       {(localStorage.getItem('userdata').access!=="Employee")?
-      <Grid container spacing={10}>
-        <Grid item xs={4} sm={4}md={4}></Grid>
-        <Grid item xs={4} sm={4} md={4}>
-          <Paper className={classes.paper}>
-          <Link to='./AllowAccess'><Button>Allow Access</Button></Link>
-          </Paper>
-        </Grid>
-        </Grid>:""}
+          <div className={classes.btn}><Link to='./AllowAccess' style={{textDecoration :'none'}}><Button variant='contained' color="secondary">Allow Access</Button></Link></div>
+          :""}
     </div>
   )
     }

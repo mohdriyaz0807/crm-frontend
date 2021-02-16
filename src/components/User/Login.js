@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import {Paper , Grid , FormControl,FormHelperText,Input,InputLabel,Button,makeStyles  } from '@material-ui/core';
 import { Link } from "react-router-dom";
 import axios from "axios"
@@ -36,7 +36,25 @@ note:{
 }));
 
 const Login =() =>{
-    let url='https://crm-easy.herokuapp.com'
+  let url='https://crm-easy.herokuapp.com'
+
+  useEffect(() => {
+  fetch(`${url}/login`,{
+    method: "GET",
+    headers: {
+      "auth" : localStorage.getItem('token')
+    },
+  }).then((res) => res.json())
+  .then((data) =>{
+    console.log(data)
+    if(data.message){
+      window.location.href='/Dashboard'
+    }
+  }).catch((err) => {
+    console.log(err)
+ })
+}, [])
+
     const [data,setData]=useState({email:"",password:""})
     const [loading , setLoading ] = useState(false)
     const SweetAlert =(status,data)=>{
@@ -70,7 +88,8 @@ const Login =() =>{
         }
       }
       catch(err) {
-        console.log(err)
+          SweetAlert('warning',err)
+          console.log(err)
         setLoading(false)
       }
     }

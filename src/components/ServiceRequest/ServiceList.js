@@ -3,7 +3,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import {Alert , AlertTitle} from '@material-ui/lab'
 import {Table , Button } from 'react-bootstrap'
 
-function ServiceList({setShow , setData}) {
+function ServiceList({setShow , setData, render}) {
         useEffect(() => {
             fetch("https://crm-easy.herokuapp.com/service", {
                 method : "GET",
@@ -24,7 +24,7 @@ function ServiceList({setShow , setData}) {
                 setLoading(false)
                setAlert({display : true , message : "Something went wrong try again later" })
             })
-       }, [])
+       }, [render])
        const [services , setService ] =useState([])
        const [loading , setLoading ] = useState(true)
        const [alert , setAlert ] = useState({display : false , message : "" })

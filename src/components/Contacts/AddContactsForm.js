@@ -2,7 +2,8 @@ import React , {useState} from 'react'
 import {Form , Col, Button } from 'react-bootstrap'
 import {Alert } from '@material-ui/lab'
 
-function AddContactsForm() {
+
+function AddContactsForm(props) {
     
   const handleOnSubmit = async (event) => {
 
@@ -21,13 +22,15 @@ function AddContactsForm() {
     if(contact.message === "success"){
       console.log(contact.message)
       setLoading(false)
-      setAlert({display : true , message : "service created successfully"  , severity : "success" })
+      setAlert({display : true , message : "contact created successfully"  , severity : "success" })
+      {props.Rerender(true)}
     }
     else{
       console.log(contact.message)
       setLoading(false)
       setAlert({display : true , message : contact.message , severity : "error" })
     }
+    setData({email : '' , name : "" , company : "" })
   }catch(err){
     setLoading(false)
     setAlert({display : true , message : "Something went wrong..." , severity : "error" })
@@ -53,18 +56,21 @@ function AddContactsForm() {
     
 <Form onSubmit={handleOnSubmit} >
   <Form.Row>
-    <Col md={3}>
+      <Form.Group as={Col} md="3" >
+      <Form.Label>Name </Form.Label>
       <Form.Control placeholder="Name" type="text" onChange={handleOnChange} name="name" value={data.name} />
-    </Col>
-    <Col md={3}>
+    </Form.Group>
+      <Form.Group as={Col} md="3" >
+      <Form.Label>E-mail </Form.Label>
       <Form.Control placeholder="email" type="email" onChange={handleOnChange} name="email" value={data.email} />
-    </Col>
-    <Col md={3}>
+    </Form.Group>
+      <Form.Group as={Col} md="3" >
+      <Form.Label>Company </Form.Label>
       <Form.Control placeholder="company" type="text" onChange={handleOnChange} name="company" value={data.company} />
-    </Col>
-    <Col md={3}>
+    </Form.Group>
+      <Form.Group as={Col} md="3" className="pt-4">
       <Button type="submit" disabled={loading}>{loading ? "Please Wait" : "Submit"}</Button>
-    </Col>
+    </Form.Group>
   </Form.Row>
 </Form>
 </>

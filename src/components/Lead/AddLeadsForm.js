@@ -1,8 +1,9 @@
 import React ,{useState} from "react";
 import { Form, Col, Button } from "react-bootstrap";
-import {Alert } from '@material-ui/lab'
+import {Alert} from '@material-ui/lab';
+import {Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle } from '@material-ui/core';
 
-function AddLeadsForm({setData , data}) {
+function AddLeadsForm({setData , data, Rerender}) {
 
   const handleAdd = async () => {
     var lead = await fetch("https://crm-easy.herokuapp.com/leads",{
@@ -24,7 +25,7 @@ function AddLeadsForm({setData , data}) {
       setLoading(false)
       setAlert({display : true , message : lead.message , severity : "error" })
     }
-
+    Rerender(true)
   }
 
   const handleEdit = async() =>{
@@ -52,6 +53,7 @@ function AddLeadsForm({setData , data}) {
       setLoading(false)
       setAlert({display : true , message : "Something went wrong..." , severity : "error" })
     }
+    Rerender(true)
   }
 
   const handleOnSubmit = async (event) => {

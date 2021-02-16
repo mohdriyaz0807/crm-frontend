@@ -7,6 +7,7 @@ import ContatsList from './ContactsList'
 function Contacts() {
 
     const [show, setShow] = useState("none")
+    const [render,Rerender] = useState(false)
     return (
         <div>
             
@@ -19,12 +20,12 @@ function Contacts() {
             </Row>
             <Row style={{display : show }}> 
                 <Col>
-                <AddContactsForm />
+                <AddContactsForm Rerender={Rerender} />
                 </Col>
             </Row>
             <Row> 
                 <Col>
-                <ContatsList />
+                <ContatsList render={render} Rerender={Rerender}/>
                 </Col>
             </Row>
             

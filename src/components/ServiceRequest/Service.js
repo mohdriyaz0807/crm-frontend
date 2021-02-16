@@ -5,7 +5,7 @@ import AddServiceForm from './AddServiceForm'
 
 function Service() {
     const [show, setShow] = useState("none")
-    // const [initialState , setInitialState ] = useState({email : '' , description : "" , status : "created" })
+    const [render,Rerender] = useState(false)
     const [data, setData] = useState({email : '' , description : "" , status : "new" })
     return (
         <div>
@@ -18,12 +18,12 @@ function Service() {
         </Row>
         <Row style={{display : show }}>
           <Col>
-            <AddServiceForm data={data} setData={setData} />
+            <AddServiceForm data={data} setData={setData} Rerender={Rerender} />
           </Col>
         </Row>
         <Row>
           <Col>
-            <ServiceList setShow={setShow} setData={setData} />
+            <ServiceList setShow={setShow} setData={setData} render={render} Rerender={Rerender}/>
           </Col>
         </Row>
       </Container>

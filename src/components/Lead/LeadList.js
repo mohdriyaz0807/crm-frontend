@@ -3,7 +3,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import {Alert , AlertTitle} from '@material-ui/lab'
 import {Table , Button } from 'react-bootstrap'
 
-function LeadList({setData , setShow}) {
+function LeadList({setData , setShow, render}) {
     useEffect(() => {
         fetch("https://crm-easy.herokuapp.com/leads", {
             method : "GET",
@@ -11,7 +11,6 @@ function LeadList({setData , setShow}) {
                "auth" : localStorage.getItem('token')
             }
         } ).then(res => res.json()).then((data) =>{
-            // Upadte 
             setLoading(false)
             if(data.message === "success"){
                console.log(data)
@@ -24,29 +23,7 @@ function LeadList({setData , setShow}) {
           setLoading(false)
            setAlert({display : true , message : "Something went wrong try again later" })
         })
-   }, [])
-
-   const reRender = () => {
-    fetch("https://crm-easy.herokuapp.com/leads", {
-      method : "GET",
-      headers : {
-         "auth" : localStorage.getItem('token')
-      }
-  } ).then(res => res.json()).then((data) =>{
-      // Upadte 
-      setLoading(false)
-      if(data.message === "success"){
-         console.log(data)
-         setLeads(data.leads)
-      }
-      else{
-         setAlert({display : true , message : data.message })
-      }
-  }).catch((err) => {
-    setLoading(false)
-     setAlert({display : true , message : "Something went wrong try again later" })
-  })
-}
+   }, [render])
 
    const [leads , setLeads ] =useState([])
    const [loading , setLoading ] = useState(true)

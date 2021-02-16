@@ -5,6 +5,7 @@ import LeadList from "./LeadList";
 
 function Leads() {
   const [show, setShow] = useState("none");
+  const [render,Rerender] = useState(false)
   const [data, setData] = useState({email : '' , description : "" , status : "new" })
   return (
     <div>
@@ -17,12 +18,12 @@ function Leads() {
         </Row>
         <Row style={{display : show }}>
           <Col>
-            <AddLeadsForm data={data} setData={setData} />
+            <AddLeadsForm data={data} setData={setData} Rerender={Rerender}/>
           </Col>
         </Row>
         <Row>
           <Col>
-            <LeadList setData={setData} setShow={setShow} />
+            <LeadList setData={setData} setShow={setShow} render={render} Rerender={Rerender} />
           </Col>
         </Row>
       </Container>

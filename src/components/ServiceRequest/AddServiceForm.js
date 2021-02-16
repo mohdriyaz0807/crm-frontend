@@ -2,7 +2,7 @@ import React , {useState} from 'react'
 import {Form  , Col, Button } from 'react-bootstrap'
 import {Alert } from '@material-ui/lab'
 
-function AddServiceForm({setData , data}) {
+function AddServiceForm({setData , data, Rerender}) {
 
   const handleAdd = async () => {
 
@@ -25,7 +25,7 @@ function AddServiceForm({setData , data}) {
       setLoading(false)
       setAlert({display : true , message : service.message , severity : "error" })
     }
-
+    Rerender(true)
   }
 
   const handleEdit = async () => {
@@ -53,6 +53,7 @@ function AddServiceForm({setData , data}) {
     setLoading(false)
     setAlert({display : true , message : "Something went wrong..." , severity : "error" })
   }
+  Rerender(true)
   }
 
 

@@ -140,9 +140,17 @@ const Login =() =>{
 const String=()=>{
     let url='https://crm-easy.herokuapp.com'
     const requiredstring = localStorage.getItem('userdata').verifystring
+    const SweetAlert =(status,data)=>{
+      Swal.fire({
+        icon: status,
+        title: 'Alert',
+        text: data,
+    })
+    }
     const show=async()=>{
     const res=await axios.get(`${url}/confirm/${requiredstring}`)
     console.log(res.data)
+    SweetAlert('success',res.message)
     }
     show()
 }

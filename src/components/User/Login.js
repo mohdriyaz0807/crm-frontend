@@ -139,7 +139,8 @@ const Login =() =>{
 
 const String=()=>{
     let url='https://crm-easy.herokuapp.com'
-    const requiredstring = localStorage.getItem('userdata').verifystring
+    const href = window.location.href.split('/')
+    const requiredstring = href[href.length-1]
     const SweetAlert =(status,data)=>{
       Swal.fire({
         icon: status,

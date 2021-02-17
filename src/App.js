@@ -39,7 +39,7 @@ function App() {
         <Route exact path="/Register">
          <Register/>
         </Route>
-        <Route path="/String">
+        <Route path="/String/:verifystring">
           <String/>
         </Route>
         <Route exact path="/Forgot">

@@ -47,7 +47,7 @@ const Login =() =>{
   }).then((res) => res.json())
   .then((data) =>{
     console.log(data)
-    if(data.message){
+    if(data.message===true){
       window.location.href='/Dashboard'
     }
   }).catch((err) => {
@@ -115,7 +115,7 @@ const Login =() =>{
             <FormHelperText id="my-helper-text1">Password may be case sensitive</FormHelperText>
             </FormControl><br/><br/>
             <FormControl>
-            <Button variant="contained" color="primary" disabled={loading} onClick={submit}>
+            <Button variant="contained" color="secondary" disabled={loading} onClick={submit}>
             {loading ? "Logging in.." : "Login" }
             </Button>
             </FormControl><br/><br/>

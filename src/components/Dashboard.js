@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Dashboard = () => {
+const Dashboard = ({setauth}) => {
   let url='https://crm-easy.herokuapp.com'
   const SweetAlert =(status,data)=>{
     Swal.fire({
@@ -47,6 +47,7 @@ const Dashboard = () => {
             }
         }).then(res => res.json()).then((data) =>{ 
             if(data.icon == "warning"){
+              setauth({jwt:''})
               SweetAlert(data.icon,data.message)
               window.location.href='/Login'
             } else{

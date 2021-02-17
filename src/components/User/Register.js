@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
       padding: theme.spacing(4),
       flexGrow: 1,
+      backgroundImage:'url(https://i.pinimg.com/originals/e2/34/b5/e234b5999940f25089b7bfd89ab74651.jpg)'
     },
     paper: {
       padding: theme.spacing(5),
@@ -34,6 +35,7 @@ const Register = () =>{
       })
       }
     const submit = async ()=>{
+      if(Object.values(data).length>=4){
     setLoading(true)
     try {
         var user = await fetch(`${url}/register`,{
@@ -46,6 +48,7 @@ const Register = () =>{
         if(user.icon === "success"){
           console.log(user.message)
           setLoading(false)
+          SweetAlert(user.icon,user.message)
           setData( {name : "" , email : '' , password : "" , access : ""} )
           window.location.href='/Login'
         }
@@ -57,17 +60,19 @@ const Register = () =>{
       }
       catch(err) {
         console.log(err);
+    }}else{
+      SweetAlert('warning','Please Fill all fields')
     }
       }
     const classes = useStyles()
     return(
         <div className={classes.root}>
         <Grid container spacing={2}>
-          <Grid item sm={3} xs={12} md={4}>
+          <Grid item sm={4} xs={12} md={7} className={classes.title}>
           <h1>Easy CRM</h1><h2>Register now to get the Exclusive Benefits</h2>
           </Grid>
-        <Grid item sm={6} xs={12} md={4}>
-        <Paper className={classes.paper}>
+        <Grid item sm={8} xs={12} md={5}>
+        <Paper className={classes.paper} >
             <FormControl >
             <InputLabel htmlFor="my-name">Full Name</InputLabel>
             <Input type='text' id="my-name" onChange={e=>setData({...data,name:e.target.value})} value={data.name}/>

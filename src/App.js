@@ -1,6 +1,6 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import "./App.css";
-import { Switch, Route, BrowserRouter as Router,Redirect } from "react-router-dom";
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import {Login ,String} from "./components/User/Login";
 import Register from "./components/User/Register";
 import Forgot from "./components/User/Forgot";
@@ -16,9 +16,15 @@ import Header from './components/Header'
 
 
 function App() {
+  const[auth,setauth]=useState({jwt:''})
+  useEffect(() => {
+    return () => {
+        setauth({jwt:localStorage.getItem('token')})
+    }
+}, [])
   return (
     <>
-    <Header/>
+    <Header auth={auth}/>
     <Router>
       <Switch>
         <Route exact path="/">
@@ -28,7 +34,7 @@ function App() {
         <Login/> 
         </Route>
         <Route exact path="/Dashboard">
-          <Dashboard/>
+          <Dashboard setauth={setauth}/>
         </Route>
         <Route exact path="/Register">
          <Register/>

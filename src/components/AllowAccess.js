@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from '@material-ui/lab/Skeleton';
-import {Alert , AlertTitle} from '@material-ui/lab'
-import {Table , Button ,Dropdown } from 'react-bootstrap'
+import {Alert } from '@material-ui/lab'
+import {Table  ,Dropdown } from 'react-bootstrap'
 
 function AllowAccess() {
+  const [render,Rerender] = useState(false)
 
     useEffect(() =>{
         fetch("https://crm-easy.herokuapp.com/access",{
@@ -20,27 +21,9 @@ function AllowAccess() {
             setLoading(false)
         }
     }).catch(err => {console.log(err)})
-    } , [] )
+    } , [render] )
 
-    const reRender = () => {
-        fetch("https://crm-easy.herokuapp.com/access",{
-      method: "GET",
-      headers: {
-        "auth" : localStorage.getItem('token')
-      }
-    }).then((res) => res.json()).then(data => {
-      console.log(data)
-        if(data.message === "success"){
-            setLoading(false)
-            setAccessUsers(data.users)
 
-        }
-        else {
-            setLoading(false)
-        }
-    }).catch(err => {console.log(err)})
-    
-    }
 
     const handleChange = (id , permission ) => {
         console.log(id , permission)
@@ -54,7 +37,7 @@ function AllowAccess() {
     }).then((res) => res.json()).then(data => {
         if(data.message === "success") {
             setAlert({display : true , message : "Changes have been made successfully" , severity:"success" })
-            reRender()
+            Rerender(true)
         }
         else{
             setAlert({display : true , message : data.message , severity:"error" })

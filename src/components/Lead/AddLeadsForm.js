@@ -1,7 +1,6 @@
 import React ,{useState} from "react";
 import { Form, Col, Button } from "react-bootstrap";
 import {Alert} from '@material-ui/lab';
-import {Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle } from '@material-ui/core';
 
 function AddLeadsForm({setData , data, Rerender}) {
 

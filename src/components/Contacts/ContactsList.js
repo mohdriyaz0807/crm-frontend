@@ -2,7 +2,7 @@ import React , {useEffect , useState} from 'react'
 import Skeleton from '@material-ui/lab/Skeleton';
 import {Alert , AlertTitle} from '@material-ui/lab'
 import DeleteIcon from '@material-ui/icons/Delete';
-import {Table , Button } from 'react-bootstrap'
+import {Table  } from 'react-bootstrap'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 function ContatsList(props) {

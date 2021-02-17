@@ -24,13 +24,12 @@ const useStyles = makeStyles((theme) => ({
     boxShadow:'3px 5px gray',
     backgroundColor:"lightslategray",
     textAlign: 'center',
-    color: theme.palette.text.secondary,
     textDecorationLine:'none',
     color:'white',
   },
 }));
 
-const Dashboard = ({setauth}) => {
+const Dashboard = () => {
   let url='https://crm-easy.herokuapp.com'
   const SweetAlert =(status,data)=>{
     Swal.fire({
@@ -47,7 +46,6 @@ const Dashboard = ({setauth}) => {
             }
         }).then(res => res.json()).then((data) =>{ 
             if(data.icon == "warning"){
-              setauth({jwt:''})
               SweetAlert(data.icon,data.message)
               window.location.href='/Login'
             } else{

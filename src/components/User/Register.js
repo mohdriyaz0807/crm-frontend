@@ -95,7 +95,7 @@ const Register = () =>{
             <br/>
             <Button variant="contained" color="primary" disabled={loading} onClick={submit}>
             {loading ? "Please Wait.." : "Register" }
-            </Button><br/>
+            </Button><br/><br/>
             <FormControl>
             <Link to='./Login'>Back</Link>
             </FormControl>

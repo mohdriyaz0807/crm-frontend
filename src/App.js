@@ -16,15 +16,9 @@ import Header from './components/Header'
 
 
 function App() {
-  const[auth,setauth]=useState({jwt:''})
-  useEffect(() => {
-    return () => {
-        setauth({jwt:localStorage.getItem('token')})
-    }
-}, [])
   return (
     <>
-    <Header auth={auth}/>
+    <Header/>
     <Router>
       <Switch>
         <Route exact path="/">
@@ -34,7 +28,7 @@ function App() {
         <Login/> 
         </Route>
         <Route exact path="/Dashboard">
-          <Dashboard setauth={setauth}/>
+          <Dashboard />
         </Route>
         <Route exact path="/Register">
          <Register/>
@@ -45,7 +39,7 @@ function App() {
         <Route exact path="/Forgot">
          <Forgot/>
         </Route>
-        <Route exact path="/Reset">
+        <Route exact path="/ResetPassword/:randomString">
          <Reset/>
         </Route>
         <Route path="/Contacts">

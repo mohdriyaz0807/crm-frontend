@@ -1,17 +1,18 @@
 import React from 'react'
 import {Navbar,Nav} from 'react-bootstrap'
 
-const Header = ({auth}) => {
+const Header = () => {
 
     return (
         <>
         <Navbar bg="info" variant="dark" expand="lg">
         <Navbar.Brand href="#home">Easy CRM</Navbar.Brand>
-        {auth.jwt==='' ? 
+        {window.location.href.split('/').includes('Login')===false ? 
         <>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" style={{float:'right'}}>
             <Nav className="mr-auto">
+            <Nav.Link href="/AllowAccess">AllowAccess</Nav.Link>
             <Nav.Link href="/Leads">Leads</Nav.Link>
             <Nav.Link href="/Contacts">Contacts</Nav.Link>
             <Nav.Link href="/ServiceRequest">ServiceRequest</Nav.Link>

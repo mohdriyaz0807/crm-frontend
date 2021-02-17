@@ -7,7 +7,7 @@ const Header = () => {
         <>
         <Navbar bg="info" variant="dark" expand="lg">
         <Navbar.Brand href="#home">Easy CRM</Navbar.Brand>
-        {window.location.href.split('/').includes('Login')===false ? 
+        {['Login','Register','Forgot','ResetPassword'].some(i=>window.location.href.split('/').includes(i))===false ? 
         <>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" style={{float:'right'}}>

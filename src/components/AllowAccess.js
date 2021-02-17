@@ -75,7 +75,7 @@ else
     </tr>
   </thead>
   <tbody>
-      {accessUsers.map(user => (
+      {accessUsers ? accessUsers.map(user => (
               <tr key = {user._id} >
               <th>{user.name}</th>
               <th>{user.email}</th>
@@ -93,7 +93,8 @@ else
   </Dropdown.Menu>
 </Dropdown></th>
             </tr>
-      ))}
+      )):
+      <h1>No Users to display</h1> }
   </tbody>
   </Table>
   </>

@@ -52,7 +52,7 @@ function ServiceList({setShow , setData, render}) {
        </tr>
      </thead>
      <tbody>
-    {services.map(service => ( 
+    {services ? services.map(service => ( 
                    <tr key={service._id}>
                    <td>{service.email}</td>
                  <td>{service.description}</td>
@@ -62,7 +62,8 @@ function ServiceList({setShow , setData, render}) {
                        <Button onClick={() => {setShow('flex'); setData({_id : service._id , email : service.email , description : service.description , status : service.status }); } } >Edit</Button>
                    </td>
                  </tr>
-       )) }
+       )) :
+       <h1>No Service Request to Display</h1>}
      </tbody>
     </Table> } 
            </>

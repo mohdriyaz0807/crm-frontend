@@ -68,7 +68,7 @@ function ContatsList(props) {
     </tr>
   </thead>
   <tbody>
-{contacts.map( (contact , index ) => (
+{contacts ? contacts.map( (contact , index ) => (
                 <tr key={contact._id}>
                 <td>{index+1}</td>
               <td>{contact.name}</td>
@@ -76,7 +76,8 @@ function ContatsList(props) {
                 <td>{contact.company}</td>
                 <td onClick={()=>handleDelete(contact._id)}>{action}</td>
               </tr>
-    )) }
+    )):
+    <h1>No Contacts to Display</h1> }
   </tbody>
 </Table> } 
         </>

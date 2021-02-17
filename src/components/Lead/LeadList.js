@@ -52,7 +52,7 @@ function LeadList({setData , setShow, render}) {
    </tr>
  </thead>
  <tbody>
-{leads.map(lead => ( 
+{leads ? leads.map(lead => ( 
                <tr key={lead._id}>
                <td>{lead.email}</td>
                <td>{lead.description}</td>
@@ -62,7 +62,9 @@ function LeadList({setData , setShow, render}) {
                   <Button onClick={()=>{setData({_id : lead._id , email : lead.email , description : lead.description , status : lead.status }); setShow("flex");}}>Edit</Button>
                </td>
             </tr>
-   )) }
+   )) :
+   <h1>No Leads to Display</h1> 
+   }
    </tbody>
 </Table> } 
        </>

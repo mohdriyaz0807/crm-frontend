@@ -49,13 +49,13 @@ function AddServiceForm({ setData, data, render, reRender }) {
         },
         body: JSON.stringify(data),
       })
-      const service = response.json()
+      const service = await response.json()
       if (service.message === "success") {
         setLoading(false);
         setData({ status: "created", email: "", description: "" });
         setAlert({
           display: true,
-          message: "service created successfully",
+          message: "service edited successfully",
           severity: "success",
         });
       } else {

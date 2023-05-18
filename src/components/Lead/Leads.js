@@ -4,26 +4,52 @@ import AddLeadsForm from "./AddLeadsForm";
 import LeadList from "./LeadList";
 
 function Leads() {
-  const [show, setShow] = useState("none");
-  const [render,Rerender] = useState(false)
-  const [data, setData] = useState({email : '' , description : "" , status : "new" })
+  const [show, setShow] = useState(false);
+  const [render, reRender] = useState(false);
+  const [data, setData] = useState({
+    email: "",
+    description: "",
+    status: "new",
+  });
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: "#90ee90c4",
+        padding: "20px 0",
+        borderRadius: 5,
+        boxShadow: "3px 3px 20px #c98aff",
+      }}
+    >
       <Container fluid>
         <Row>
           <Col>
             <h2 className="float-left">Leads</h2>
-            <Button variant="success" className="float-right" onClick={() => {if(show === "none") setShow("flex"); else setShow("none"); setData({email : '' , description : "" , status : "new" }) }} >{show === "none" ? "New lead" : "Close"  }</Button>
+            <Button
+              variant="success"
+              className="float-right"
+              onClick={() => {
+                setShow(!show);
+                setData({ email: "", description: "", status: "new" });
+              }}
+            >
+              {!show ? "New lead" : "Close"}
+            </Button>
           </Col>
         </Row>
-        <Row style={{display : show }}>
+        <br/>
+        {show && <Row>
           <Col>
-            <AddLeadsForm data={data} setData={setData} Rerender={Rerender}/>
+            <AddLeadsForm data={data} setData={setData} render={render} reRender={reRender} />
           </Col>
-        </Row>
+        </Row>}
         <Row>
           <Col>
-            <LeadList setData={setData} setShow={setShow} render={render} Rerender={Rerender} />
+            <LeadList
+              setData={setData}
+              setShow={setShow}
+              render={render}
+              reRender={reRender}
+            />
           </Col>
         </Row>
       </Container>

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Paper , Grid ,FormControl,Input,InputLabel,Button,makeStyles,FormHelperText } from '@material-ui/core';
 import Swal from 'sweetalert2';
 import { Link } from "react-router-dom";
+import { API_PATH } from '../../utils/api';
 
 
 const useStyle = makeStyles((theme)=>({
@@ -33,8 +34,6 @@ note:{
 
 
 const Forgot = () => {
-        let url='https://crm-easy.herokuapp.com'
-      
           const [data,setData]=useState({password:"",repassword:"",randomstring:""})
           const [loading , setLoading ] = useState(false)
           const SweetAlert =(status,data)=>{
@@ -47,10 +46,10 @@ const Forgot = () => {
           const submit = async ()=>{
               let href = window.location.href.split('/')
               setData({...data,randomstring : href[href.length-1]})
-              if(data.password==data.repassword){
+              if(data.password===data.repassword){
               setLoading(true)
               try {
-              var user = await fetch(`${url}/reset`,{
+              var user = await fetch(`${API_PATH}/reset`,{
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",

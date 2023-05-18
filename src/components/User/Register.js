@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Paper , Grid ,FormControl,Input,InputLabel,Button,makeStyles,FormLabel,Radio,FormControlLabel,RadioGroup } from '@material-ui/core';
 import { Link } from "react-router-dom";
 import Swal from 'sweetalert2';
+import { API_PATH } from '../../utils/api';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const Register = () =>{
-    let url='https://crm-easy.herokuapp.com'
     const [data,setData]=useState({name:"",email:"",password:"", access : "",permission:"none"})
     const [loading , setLoading ] = useState(false)
     const SweetAlert =(status,data)=>{
@@ -38,7 +38,7 @@ const Register = () =>{
       if(Object.values(data).length>=4){
     setLoading(true)
     try {
-        var user = await fetch(`${url}/register`,{
+        var user = await fetch(`${API_PATH}/register`,{
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -88,12 +88,12 @@ const Register = () =>{
             <FormControl component="fieldset">
             <FormLabel component="legend">Register as</FormLabel>
             <RadioGroup aria-label="gender" name="gender1" value={data.access} onChange={e=>setData({...data,access:e.target.value})}>
-                <FormControlLabel value="Manager" control={<Radio />} label="Manager" />
-                <FormControlLabel value="Employee" control={<Radio />} label="Employee" />
+                <FormControlLabel value="admin" control={<Radio />} label="Manager" />
+                <FormControlLabel value="user" control={<Radio />} label="Employee" />
             </RadioGroup>
             </FormControl>
             <br/>
-            <Button variant="contained" color="primary" disabled={loading} onClick={submit}>
+            <Button variant="contained" color="primary" onClick={submit}>
             {loading ? "Please Wait.." : "Register" }
             </Button><br/><br/>
             <FormControl>

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Paper , Grid ,FormControl,Input,InputLabel,Button,makeStyles,FormHelperText } from '@material-ui/core';
 import Swal from 'sweetalert2';
 import { Link } from "react-router-dom";
+import { API_PATH } from '../../utils/api';
 
 
 const useStyle = makeStyles((theme)=>({
@@ -33,7 +34,6 @@ note:{
 
 
 const Forgot = () => {
-        let url='https://crm-easy.herokuapp.com'
       
           const [data,setData]=useState({email:""})
           const [loading , setLoading ] = useState(false)
@@ -47,7 +47,7 @@ const Forgot = () => {
           const submit = async ()=>{
               setLoading(true)
               try {
-              var user = await fetch(`${url}/forgotpassword`,{
+              var user = await fetch(`${API_PATH}/forgotpassword`,{
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",

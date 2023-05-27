@@ -56,7 +56,8 @@ function ServiceList({ setShow, setData, render }) {
             <strong> - check it out!</strong>
           </Alert>
         ) : (
-          <Table striped bordered hover style={{ backgroundColor: "white" }}>
+          <div style={{maxWidth: '85vw'}}>
+          <Table striped bordered hover responsive style={{ backgroundColor: "white" }}>
             <thead>
               <tr>
                 <th>Customer contact</th>
@@ -102,6 +103,7 @@ function ServiceList({ setShow, setData, render }) {
               )}
             </tbody>
           </Table>
+          </div>
         )}
       </>
     );

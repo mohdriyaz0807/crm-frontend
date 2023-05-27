@@ -10,35 +10,7 @@ import {
 import axios from "axios";
 import Swal from "sweetalert2";
 import { API_PATH } from "../../utils/api";
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     padding: theme.spacing(4),
-//     flexGrow: 1,
-//   },
-//   firstline: {
-//     textAlign: "center",
-//     fontSize: "150%",
-//     fontFamily: "serif",
-//   },
-//   paper: {
-//     padding: theme.spacing(2),
-//     textAlign: "center",
-//     color: theme.palette.text.secondary,
-//   },
-//   title: {
-//     fontSize: "100%",
-//     fontFamily: "serif",
-//     fontStyle: "bold",
-//     textAlign: "center",
-//   },
-//   note: {
-//     textAlign: "center",
-//     paddingBlock: "2%",
-//     border: "4px solid white",
-//     borderTopStyle: "curl",
-//   },
-// }));
+import { Loader } from "../Loader";
 
 const Login = () => {
   useEffect(() => {
@@ -98,6 +70,7 @@ const Login = () => {
   };
   return (
     <div className="login-container">
+      {loading && <Loader />}
       <Grid container spacing={2} alignItems="center" justifyContent="center" padding="0 20px">
         <Grid item sm={12} xs={12} md={4} lg={4} >
           <div className="title">
@@ -135,17 +108,10 @@ const Login = () => {
               <Button
                 variant="contained"
                 color="secondary"
-                disabled={loading}
                 onClick={submit}
               >
-                {loading ? "Logging in.." : "Login"}
+                Login
               </Button>
-              {/* </FormControl><br/><br/>
-            <FormControl>
-            <Link to='./Register'>New User?</Link>
-            </FormControl><br/><br/>
-            <FormControl>
-            <Link to='./Forgot'>Forgot Password?</Link> */}
             </FormControl>
           </Paper>
           <div className="note">

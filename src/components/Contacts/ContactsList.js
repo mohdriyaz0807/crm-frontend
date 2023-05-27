@@ -3,7 +3,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import { Alert, AlertTitle } from "@mui/material";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { Table } from "react-bootstrap";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import { Loader } from "../Loader";
 import { API_PATH } from "../../utils/api";
 import Swal from "sweetalert2";
 
@@ -11,7 +11,7 @@ function ContatsList(props) {
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [alert, setAlert] = useState({ display: false, message: "" });
-  const [action, setAction] = useState(<DeleteIcon fontSize="small" />);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     const getList = async () => {
@@ -57,7 +57,7 @@ function ContatsList(props) {
   };
 
   const onDelete = async (id) => {
-    setAction(<CircularProgress color="inherit" />);
+    setDeleting(true)
     await fetch(`${API_PATH}/contact/${id}`, {
       method: "PUT",
       headers: {
@@ -76,7 +76,7 @@ function ContatsList(props) {
           message: err - "Something went wrong try again later",
         });
       });
-    setAction(<DeleteIcon fontSize="small" />);
+      setDeleting(false)
   };
 
   if (loading)
@@ -84,12 +84,13 @@ function ContatsList(props) {
       <>
         <Skeleton variant="rect" height={"50px"} />
         <Skeleton variant="rect" height={"50px"} />
-        <Skeleton variant="rect" height={"50px"} />{" "}
+        <Skeleton variant="rect" height={"50px"} />
       </>
     );
   else
     return (
       <>
+        {deleting && <Loader/>}
         {alert.display ? (
           <Alert severity="error" variant="filled">
             <AlertTitle>Error</AlertTitle>
@@ -97,8 +98,10 @@ function ContatsList(props) {
             <strong> - check it out!</strong>
           </Alert>
         ) : (
+          <div style={{maxWidth: '85vw'}}>
           <Table
             striped
+            responsive
             bordered
             hover
             style={{ backgroundColor: "white" }}
@@ -120,7 +123,9 @@ function ContatsList(props) {
                     <td>{contact.name}</td>
                     <td>{contact.email}</td>
                     <td>{contact.company}</td>
-                    <td onClick={() => handleDelete(contact._id)}>{action}</td>
+                    <td onClick={() => handleDelete(contact._id)}>
+                      <DeleteIcon fontSize="small" />
+                    </td>
                   </tr>
                 ))
               ) : (
@@ -134,6 +139,7 @@ function ContatsList(props) {
               )}
             </tbody>
           </Table>
+          </div>
         )}
       </>
     );

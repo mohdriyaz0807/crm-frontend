@@ -3,6 +3,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import Alert from "@mui/material/Alert";
 import { Table, Dropdown } from "react-bootstrap";
 import { API_PATH } from "../utils/api";
+import { Loader } from "./Loader";
 
 function AllowAccess() {
   const [render, reRender] = useState(false);
@@ -13,6 +14,7 @@ function AllowAccess() {
     message: "",
     severity: "error",
   });
+  const [working, setWorking] = useState(false)
 
   useEffect(() => {
     const getPeople = async () => {
@@ -41,9 +43,9 @@ function AllowAccess() {
     getPeople();
   }, [render]);
 
-  const handleChange = (id, permission) => {
-    console.log(id, permission);
-    fetch(`${API_PATH}/access`, {
+  const handleChange = async (id, permission) => {
+    setWorking(true)
+    await fetch(`${API_PATH}/access`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -67,6 +69,7 @@ function AllowAccess() {
       .catch((err) => {
         console.log(err);
       });
+      setWorking(false)
   };
 
   if (loading)
@@ -80,6 +83,7 @@ function AllowAccess() {
   else
     return (
       <>
+        {working && <Loader />}
         {alert.display ? (
           <Alert
             variant="filled"
@@ -94,10 +98,12 @@ function AllowAccess() {
         ) : (
           <></>
         )}
+        <div style={{maxWidth: '85vw'}}>
         <Table
           striped
           bordered
           hover
+          responsive
           style={{ backgroundColor: "#fff", boxShadow: "3px 3px 20px #c98aff" }}
         >
           <thead>
@@ -158,6 +164,7 @@ function AllowAccess() {
             )}
           </tbody>
         </Table>
+        </div>
       </>
     );
 }

@@ -89,6 +89,7 @@ function AddContactsForm(props) {
               onChange={handleOnChange}
               name="name"
               value={data.name}
+              required
             />
           </Form.Group>
           <Form.Group as={Col} md="3">
@@ -99,6 +100,7 @@ function AddContactsForm(props) {
               onChange={handleOnChange}
               name="email"
               value={data.email}
+              required
             />
           </Form.Group>
           <Form.Group as={Col} md="3">
@@ -109,6 +111,7 @@ function AddContactsForm(props) {
               onChange={handleOnChange}
               name="company"
               value={data.company}
+              required
             />
           </Form.Group>
           <Form.Group as={Col} md="3" className="pt-4">

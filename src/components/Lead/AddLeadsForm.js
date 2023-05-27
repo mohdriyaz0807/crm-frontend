@@ -115,6 +115,7 @@ function AddLeadsForm({ setData, data, render, reRender }) {
               onChange={handleOnChange}
               value={data.email}
               name="email"
+              required
             />
           </Form.Group>
           <Form.Group as={Col} md="3">
@@ -125,6 +126,7 @@ function AddLeadsForm({ setData, data, render, reRender }) {
               onChange={handleOnChange}
               value={data.description}
               name="description"
+              required
             />
           </Form.Group>
           <Form.Group as={Col}>
@@ -135,6 +137,7 @@ function AddLeadsForm({ setData, data, render, reRender }) {
               onChange={handleOnChange}
               value={data.status}
               name="status"
+              required
             >
               {data._id ? (
                 <>
